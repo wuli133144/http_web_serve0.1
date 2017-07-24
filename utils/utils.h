@@ -116,7 +116,7 @@ void *Calloc(unsigned int n, ssize_t length)
 typedef struct http_sock_pair
 {
     void *ip_addr;
-    int port;
+    void * port;
 } sock_pair;
 
 sock_pair sockpair;
@@ -136,9 +136,11 @@ void file_param(sock_pair *st_sockpair)
     }
     char info[BUFSIZE];
     char ip[BUFSIZE];
-    int port, pos;
+    char port[BUFSIZE];
+    int  pos;
     zero_to_buffer(ip);
     zero_to_buffer(info);
+    zero_to_buffer(port);
 
     while ((fgets(info, BUFSIZE, fp)) != NULL)
     {
@@ -146,9 +148,9 @@ void file_param(sock_pair *st_sockpair)
         pos = strspn(info, " ");
         pos = strspn(info + pos, "@");
         strcpy(ip, strtok(info + pos, ":"));
-        port = atoi(strtok(NULL, "@"));
+        strcpy(port ,strtok(NULL, "@"));
         strcpy(st_sockpair->ip_addr, ip);
-        st_sockpair->port = port;
+        strcpy(st_sockpair->port , port);
     }
 
     fclose(fp);
@@ -161,7 +163,8 @@ err:
 void Init_sockpair()
 {
     //st_sockpair->ip_addr
-    sockpair.ip_addr = Calloc(1, SIZE);
+    sockpair.ip_addr = Calloc(1, BUFSIZE);
+    sockpair.port=Calloc(1,BUFSIZE);
     file_param(&sockpair);
 }
 

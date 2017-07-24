@@ -37,6 +37,12 @@
         "http_error.h": "c",
         "http_ipc.h": "c",
         "signum.h": "c",
-        "errno.h": "c"
+        "errno.h": "c",
+        "err.h": "c",
+        "http_io_base.h": "c",
+        "stl_pair.h": "c",
+        "netdb.h": "c",
+        "inet.h": "c",
+        "socket.h": "c"
     }
 }
